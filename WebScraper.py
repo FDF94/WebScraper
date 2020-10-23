@@ -2,25 +2,35 @@ import argparse
 from urllib import request
 from urllib.error import URLError
 from HTMLAnalyzer import HTMLAnalyzer
+import logging
+
+
+logging.basicConfig(level=logging.DEBUG)
+
+
+def get_html_content(url: str):
+    try:
+        with request.urlopen(url) as page:
+            return page.read().decode("utf8")
+    except ValueError:
+        logging.error("Unknown URL type. This could be fixed by adding "
+                      "http:// at the begin of the URL.")
+        return None
+    except URLError:
+        logging.error("URL not found.")
+        return None
 
 
 def ScrapeWeb(url: str):
-    try:
-        with request.urlopen(url) as page:
-            content = page.read().decode("utf8")
-    except ValueError:
-        print("Unknown URL type. This could be fixed by adding "
-              "http:// at the begin of the URL.")
-        return -1
-    except URLError:
-        print("URL not found.")
-        return -1
 
-    parser = HTMLAnalyzer()
-    parser.feed(content)
+    content = get_html_content(url)
 
-    print(parser.get_tags_count())
-    print(parser.get_elements_count())
+    if content:
+        parser = HTMLAnalyzer()
+        parser.feed(content)
+
+        logging.info(parser.get_tags_count())
+        logging.info(parser.get_elements_count())
 
 
 parser = argparse.ArgumentParser()
