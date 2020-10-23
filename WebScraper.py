@@ -1,11 +1,20 @@
 import argparse
 from urllib import request
+from urllib.error import URLError
 from HTMLAnalyzer import HTMLAnalyzer
 
 
 def ScrapeWeb(url: str):
-    with request.urlopen(url) as page:
-        content = page.read().decode("utf8")
+    try:
+        with request.urlopen(url) as page:
+            content = page.read().decode("utf8")
+    except ValueError:
+        print("Unknown URL type. This could be fixed by adding "
+              "http:// at the begin of the URL.")
+        return -1
+    except URLError:
+        print("URL not found.")
+        return -1
 
     parser = HTMLAnalyzer()
     parser.feed(content)
