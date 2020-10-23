@@ -130,3 +130,6 @@ dmypy.json
 
 # Ignore notebook files
 *.ipynb
+
+#Ignore personal configuration
+.vscode
