@@ -3,7 +3,10 @@ from collections import Counter
 
 
 class HTMLAnalyzer(HTMLParser):
-    _open_tags = []
+
+    def __init__(self):
+        super().__init__()
+        self._open_tags = []
 
     def handle_starttag(self, tag, attrs):
         self._open_tags.append(tag)
