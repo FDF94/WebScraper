@@ -9,7 +9,9 @@ logging.basicConfig(level=logging.DEBUG)
 def get_html_content(url: str):
     try:
         with request.urlopen(url) as page:
-            return page.read().decode("utf8")
+            charset = page.info().get_content_charset()
+            content = page.read().decode(charset)
+            return content
     except ValueError:
         logging.error("Unknown URL type. This could be fixed by adding "
                       "http:// at the begin of the URL.")
