@@ -37,7 +37,7 @@ class TestGetHtmlContent(unittest.TestCase):
 
     def test_ignore_elements(self):
         # Arrange
-        parser = HTMLAnalyzer()
+        parser = HTMLAnalyzer(["pre"])
         sample_html = ("""<html>
                        <head>
                        <title>Test</title>

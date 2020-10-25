@@ -7,14 +7,15 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 
-def ScrapeWeb(url: str, filename: str = None):
+def ScrapeWeb(url: str, filename: str = None, excluded_blocks: list = None):
 
     content = get_html_content(url)
+    print(excluded_blocks)
 
     if not content:
         return None
 
-    parser = HTMLAnalyzer()
+    parser = HTMLAnalyzer(excluded_blocks)
     parser.feed(content)
 
     tags = parser.get_tags_count().most_common(5)
@@ -37,8 +38,12 @@ if __name__ == "__main__":
     parser.add_argument("-f", "--filename", default=None,
                         help="Filename in which to write results. Optional.",
                         type=str)
+    parser.add_argument("--excluded_blocks", default=[], nargs="*",
+                        help="""List of blocks which have
+                                 content that should be disregarded""",
+                        type=str)
     args = parser.parse_args()
     if args.filename is None:
-        print(ScrapeWeb(args.url))
+        print(ScrapeWeb(args.url, excluded_blocks=args.excluded_blocks))
     else:
-        ScrapeWeb(args.url, args.filename)
+        ScrapeWeb(args.url, args.filename, args.excluded_blocks)

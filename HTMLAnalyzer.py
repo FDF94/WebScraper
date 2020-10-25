@@ -4,13 +4,16 @@ from collections import Counter
 
 class HTMLAnalyzer(HTMLParser):
 
-    def __init__(self):
+    def __init__(self, excluded_blocks=None):
         super().__init__()
         self._open_tags = []
         self._close_tags = []
         self._ignore_tags = False
-        self._excluded_blocks = ["pre"]
         self._current_excluding = None
+        if excluded_blocks:
+            self._excluded_blocks = excluded_blocks
+        else:
+            self._excluded_blocks = []
 
     def handle_starttag(self, tag, attrs):
         if not self._ignore_tags:
