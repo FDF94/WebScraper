@@ -10,7 +10,6 @@ logging.basicConfig(level=logging.DEBUG)
 def ScrapeWeb(url: str, filename: str = None, excluded_blocks: list = None):
 
     content = get_html_content(url)
-    print(excluded_blocks)
 
     if not content:
         return None
