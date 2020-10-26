@@ -25,20 +25,6 @@ class TestWebScraper(unittest.TestCase):
         self.assertTrue(file_exists, "File was not generated")
         remove(filename)
 
-    def test_content_generation(self):
-        # Arrange
-        url = "https://duckduckgo.com"
-
-        # Act
-        elements_number, tags = ScrapeWeb(url=url)
-
-        # Assert
-        with self.subTest("Positive amount of elements"):
-            self.assertGreater(elements_number, 0)        
-        
-        with self.subTest("Tags element is not null"):
-            self.assertIsNotNone(tags)
-
 
 if __name__ == '__main__':
     unittest.main()
