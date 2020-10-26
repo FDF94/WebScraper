@@ -1,5 +1,6 @@
 from html.parser import HTMLParser
 from collections import Counter
+import logging
 
 
 class HTMLAnalyzer(HTMLParser):
@@ -35,7 +36,15 @@ class HTMLAnalyzer(HTMLParser):
             self._close_tags.append(tag)
 
     def get_tags_count(self):
-        return Counter(self._open_tags)
+        open_counter = Counter(self._open_tags)
+        close_counter = Counter(self._close_tags)
+        if open_counter != close_counter:
+            logging.warning("Opening and closing tag numbers do not match")
+        return open_counter
 
     def get_elements_count(self):
-        return len(self._open_tags)
+        opening_elements = len(self._open_tags)
+        closing_elements = len(self._close_tags)
+        if opening_elements != closing_elements:
+            logging.warning("Opening and closing elements numbers do not match")
+        return opening_elements
