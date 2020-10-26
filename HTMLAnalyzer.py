@@ -46,5 +46,6 @@ class HTMLAnalyzer(HTMLParser):
         opening_elements = len(self._open_tags)
         closing_elements = len(self._close_tags)
         if opening_elements != closing_elements:
-            logging.warning("Opening and closing elements numbers do not match")
+            logging.warning("Opening and closing elements"
+                            " numbers do not match")
         return opening_elements
