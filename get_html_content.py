@@ -13,8 +13,8 @@ def get_html_content(url: str):
             content = page.read().decode(charset)
             return content
     except ValueError:
-        logging.error("Unknown URL type. This could be fixed by adding "
-                      "http:// at the begin of the URL.")
+        logging.error("Unknown URL type. Try adding "
+                      "http:// or https:// at the beginning of the URL.")
         return None
     except URLError:
         logging.error("URL not found. This could be a connectivity issue.")
