@@ -15,17 +15,18 @@ This may be caused by some standalone elements like `<link>`, `<meta>` or `<br>`
 ## How to use
 
 Using the command line, the simple use is 
-`python WebScraper <URL>`
+`python -m WebScraper <URL>`
 
 Optionally, using the -f parameter, you may specify a file into which results will be written. If you do this, results won't be shown in the console.
 Example:
-`python WebScraper <URL> -f <filename>`
+`python -m WebScraper <URL> -f <filename>`
+
 Aditionally, using the --excluded_blocks option, you can specify which html elements will have their content ignored. This is useful for elements like `<pre>` or `<code>` which may contain HTML code, but it is not meant to be rendered.
 Example excluding the content of `<div>` and `<pre>`
-`python WebScraper <URL> --excluded_blocks div pre`
+`python -m WebScraper <URL> --excluded_blocks div pre`
 
 For more information, you may also use
-`python WebScraper -h`
+`python -m WebScraper -h`
 
 ## Requirements
 This project was made using Python 3.7, but it should work under any Python 3.x.
