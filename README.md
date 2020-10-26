@@ -6,7 +6,11 @@ The aim of this project is to make a simple console program, which given a URL, 
 ## Assumptions
 It is assumed the web page will have valid HTML code, i.e. it is expected that every opening tag will have a closing tag, and that there are no syntax errors like
 
-`<p Hello! </p>`
+`<p Hello! </p>`.
+
+Therefore, when results are informed, only opening tags are taken into account. Sometimes a warning may appear stating:
+_Opening and closing tag numbers do not match_
+This may be caused by some standalone elements like `<link>`, `<meta>` or `<br>` and is safe to ignore.
 
 ## How to use
 
